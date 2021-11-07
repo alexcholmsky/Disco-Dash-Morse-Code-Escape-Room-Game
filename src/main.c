@@ -26,10 +26,8 @@
 
 #include "ece198.h"
 
-void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin);
-void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
-
-    InitializePin(GPIOA, pin, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+void patterndisplay(int pattern[], unsigned int capacity, unsigned int pin);
+void patterndisplay(int pattern[], unsigned int capacity, unsigned int pin){
 
     while(true){
    
@@ -54,7 +52,7 @@ int main(void)
 
     // initialize the pins to be input, output, alternate function, etc...
 
-    InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
+    // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
 
     // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
     // is required, since there's one on the board)
@@ -67,12 +65,46 @@ int main(void)
     // as mentioned above, only one of the following code sections will be used
     // (depending on which of the #define statements at the top of this file has been uncommented)
         
-        unsigned int capacity = 20; 
-        int pattern1[20] = {0,0,0,1,1,1,0,1,0,1,1,1,0,0,0,0,1,1,1,0};
-        int pattern2[20] = {1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0}; 
+        unsigned int capacity = 26; 
+
+
+
+        int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
+        int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
+        int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
+        int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
+        InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+
+        while(true){
+
+       
+        // patterndisplay(pattern1, capacity, GPIO_PIN_6);
+
+        // patterndisplay(pattern2, capacity, GPIO_PIN_7);
+   
+        for(int i=0; i < capacity; ++i){
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, blue[i]);
+                HAL_Delay(500); 
+            }
         
-        patterndisplay(pattern1, capacity, GPIO_PIN_6);
-        patterndisplay(pattern2, capacity, GPIO_PIN_7);
+        for(int i=0; i < capacity; ++i){
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, red[i]);
+                HAL_Delay(500); 
+            }
+
+                        
+        }
+
+        //button press
+        int power = 0; 
+        while (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13))
+        {
+            power = 1; 
+        }
+
+        // patterndisplay(pattern1, capacity, GPIO_PIN_6);
+        // patterndisplay(pattern2, capacity, GPIO_PIN_7);
         
         // while(true){
         //     for(int i = 0; i < 20; ++i){
