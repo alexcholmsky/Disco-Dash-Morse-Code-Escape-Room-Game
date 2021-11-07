@@ -26,13 +26,19 @@
 
 #include "ece198.h"
 
+void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin);
+void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
 
-// void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
-//     for(int i{}; i < capacity; ++i){
-//             HAL_GPIO_WritePin(GPIOA, pin, pattern[i]);
-//             HAL_Delay(500); 
-//     }
-// }
+    InitializePin(GPIOA, pin, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+
+    while(true){
+   
+        for(int i=0; i < capacity; ++i){
+                HAL_GPIO_WritePin(GPIOA, pin, pattern[i]);
+                HAL_Delay(500); 
+            }
+    }
+}
 
 int main(void)
 {
@@ -60,33 +66,30 @@ int main(void)
 
     // as mentioned above, only one of the following code sections will be used
     // (depending on which of the #define statements at the top of this file has been uncommented)
-
-        while(true){
         
-        int pattern1[30] = {0,0,0,1,1,1,0,1,0,1,1,1,0,0,0,0,1,1,1,0,1,0,1,0,1,0,1,0,1,1};
+        unsigned int capacity = 20; 
+        int pattern1[20] = {0,0,0,1,1,1,0,1,0,1,1,1,0,0,0,0,1,1,1,0};
+        int pattern2[20] = {1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0}; 
         
-        // patterndisplay(pattern1, 30, GPIO_PIN_5);
+        patterndisplay(pattern1, capacity, GPIO_PIN_6);
+        patterndisplay(pattern2, capacity, GPIO_PIN_7);
         
-        for(int i = 0; i < 30; ++i){
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, pattern1[i]);
-            HAL_Delay(500); 
-        }
-
-        int power = 0;
-        if(!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13)){
-            if(power == 1){
-                 power = 0;
-             }
-             else{
-                 power = 1;
-             }
-        }
-        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, power);
-
-
-    }
-
-
+        // while(true){
+        //     for(int i = 0; i < 20; ++i){
+        //         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, pattern1[i]);
+        //         HAL_Delay(500); 
+        //     }
+        // }
+        // int power = 0;
+        // if(!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13)){
+        //     if(power == 1){
+        //          power = 0;
+        //      }
+        //      else{
+        //          power = 1;
+        //      }
+        // }
+        // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, power);
 
     return 0;
 }
