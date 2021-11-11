@@ -85,16 +85,69 @@ int main(void)
         // }
    
 
+        /*LEGEND
+            - blue : [2]
+            - green : [3]
+            - red : [4]
+            - yellow : [5]
+            - black : [6]
+        */
 
+        /*int correctPattern[2]={3,4};
+        int userInput[2]={0};
+        bool correct = false;
+        int i = 0;
+
+                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
+
+            if(i == 1){
+                for(int x=0; x<2; ++x){
+                    if(userInput[x]==correctPattern[x]){
+                        correct = true;
+                    }else{
+                        correct = false;
+                    }
+                }
+            }
+
+            while(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
+                userInput[i]=4;
+                ++i;
+            }
+            
+            while(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8)){
+                userInput[i]=3;
+                ++i;
+            }
+
+
+            if(correct == true){
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
+                HAL_Delay(100);                
+            }else{
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
+                HAL_Delay(100);                
+            }*/
+
+    
         //button press turn on LED
         while(true){
-            while (!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13))
+
+            while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6))
             {
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
                 HAL_Delay(100);
             }
+
+            while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8))
+            {
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
+                HAL_Delay(100);
+            }
             
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
 
             }
 
