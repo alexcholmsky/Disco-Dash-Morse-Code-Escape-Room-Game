@@ -8,7 +8,7 @@
 // To run a particular example, you should remove the comment (//) in
 // front of exactly ONE of the following lines:
 
-#define BUTTON_BLINK
+// #define BUTTON_BLINK
 // #define LIGHT_SCHEDULER
 // #define TIME_RAND
 // #define KEYPAD
@@ -26,8 +26,8 @@
 
 #include "ece198.h"
 
-void patterndisplay(int pattern[], unsigned int capacity, unsigned int pin);
-void patterndisplay(int pattern[], unsigned int capacity, unsigned int pin){
+void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin);
+void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
 
     while(true){
    
@@ -52,7 +52,7 @@ int main(void)
 
     // initialize the pins to be input, output, alternate function, etc...
 
-    // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
+    InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
 
     // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
     // is required, since there's one on the board)
@@ -74,54 +74,31 @@ int main(void)
         int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
         int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
         InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
 
-        while(true){
-
-       
-        // patterndisplay(pattern1, capacity, GPIO_PIN_6);
-
-        // patterndisplay(pattern2, capacity, GPIO_PIN_7);
-   
-        for(int i=0; i < capacity; ++i){
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, blue[i]);
-                HAL_Delay(500); 
-            }
-        
-        for(int i=0; i < capacity; ++i){
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, red[i]);
-                HAL_Delay(500); 
-            }
-
-                        
-        }
-
-        //button press
-        int power = 0; 
-        while (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13))
-        {
-            power = 1; 
-        }
-
-        // patterndisplay(pattern1, capacity, GPIO_PIN_6);
-        // patterndisplay(pattern2, capacity, GPIO_PIN_7);
-        
+        //displaying patterns
         // while(true){
-        //     for(int i = 0; i < 20; ++i){
-        //         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, pattern1[i]);
-        //         HAL_Delay(500); 
-        //     }
+
+        //     patterndisplay(blue, capacity, GPIO_PIN_5);
+
+        //     patterndisplay(red, capacity, GPIO_PIN_7);
         // }
-        // int power = 0;
-        // if(!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13)){
-        //     if(power == 1){
-        //          power = 0;
-        //      }
-        //      else{
-        //          power = 1;
-        //      }
-        // }
-        // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, power);
+   
+
+
+        //button press turn on LED
+        while(true){
+            while (!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13))
+            {
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
+                HAL_Delay(100);
+            }
+            
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
+
+            }
+
+        
 
     return 0;
 }
