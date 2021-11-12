@@ -75,6 +75,12 @@ int main(void)
         int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
         InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
         InitializePin(GPIOA, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_8, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+
 
         //displaying patterns
         // while(true){
@@ -142,12 +148,29 @@ int main(void)
 
             while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8))
             {
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, true);
+                HAL_Delay(100);
+            }
+
+            while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0))
+            {
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
                 HAL_Delay(100);
             }
+
+            while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9))
+            {
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, true);
+                HAL_Delay(100);
+            }
+
+
             
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
+
 
             }
 
