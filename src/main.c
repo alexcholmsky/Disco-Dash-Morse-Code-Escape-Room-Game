@@ -80,27 +80,27 @@ int main(void)
 
     // short patterns
         int test_array[6] = {1,0,1,0,1,0};
-        InitializePin(GPIOA, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_8, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        // InitializePin(GPIOA, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        // InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        // InitializePin(GPIOA, GPIO_PIN_8, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        // InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        // InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
 
     //displaying patterns
         while(display){
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_5);
+            patterndisplay(test_array, scapacity, GPIO_PIN_13);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_6);
+            patterndisplay(test_array, scapacity, GPIO_PIN_14);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_7);
+            patterndisplay(test_array, scapacity, GPIO_PIN_15);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_9);
+            patterndisplay(test_array, scapacity, GPIO_PIN_11);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_8);
+            patterndisplay(test_array, scapacity, GPIO_PIN_12);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_0);
+            patterndisplay(test_array, scapacity, GPIO_PIN_4);
 
             
         }
