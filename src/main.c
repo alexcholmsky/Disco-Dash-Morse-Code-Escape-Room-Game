@@ -66,13 +66,11 @@ int main(void)
     // (depending on which of the #define statements at the top of this file has been uncommented)
         
         unsigned int capacity = 26; 
-
-
-
         int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
         int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
         int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
         int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
+
         InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red LED
         InitializePin(GPIOA, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//green LED
         InitializePin(GPIOA, GPIO_PIN_8, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//blue button
@@ -91,17 +89,18 @@ int main(void)
             - black : [6]
         */
 
-        //button press turn on LED
+        const int correctPattern[6] = {2,2,2,2,2,2};
 
         bool toggle = false;
-        int * counterarr[6] = {0};
+        int userPattern[6] = {0};
         int counter = 0;
+
         while(true){
 
             if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6))
             {
                 if(!toggle) {
-                    counterarr[counter] = 6;
+                    userPattern[counter] = 3;
                     toggle = true;
                     counter++;
 
@@ -113,7 +112,7 @@ int main(void)
             else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8))
             {
                 if(!toggle) {
-                    counterarr[counter] = 8;
+                    userPattern[counter] = 2;
                     toggle = true;
                     counter++;
 
@@ -125,7 +124,7 @@ int main(void)
             else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0))
             {
                 if(!toggle) {
-                    counterarr[counter] = 0;
+                    userPattern[counter] = 4;
                     toggle = true;
                     counter++;
 
@@ -137,7 +136,7 @@ int main(void)
             else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9))
             {
                 if(!toggle) {
-                    counterarr[counter] = 9;
+                    userPattern[counter] = 5;
                     toggle = true;
                     counter++;
 
@@ -148,16 +147,6 @@ int main(void)
 
             else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1))
             {
-                
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, true);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, true);
-                HAL_Delay(400);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
                 break;
             }
             else {
@@ -173,29 +162,50 @@ int main(void)
 
 
             }
-             for (int i = 0; i < 6; i++) {
-                if(counterarr[i] == 6) {
+
+            bool isCorrect = false;
+
+            for (int i = 0; i < 6; i++) {
+                /*if(userPattern[i] == 6) {
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
                     HAL_Delay(500);
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
                 }
-                if(counterarr[i] == 8) {
+                if(userPattern[i] == 8) {
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, true);
                     HAL_Delay(500);
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
                     
                 }
-                if(counterarr[i] == 0) {
+                if(userPattern[i] == 0) {
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
                     HAL_Delay(500);
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
                 }
-                if(counterarr[i] == 9) {
+                if(userPattern[i] == 9) {
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, true);
                     HAL_Delay(500);
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
+                }*/
+
+                if(userPattern[i] == correctPattern[i]){
+                    isCorrect = true;
+                }else{
+                    isCorrect = false;
                 }
             } 
+
+            if(isCorrect){
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
+                HAL_Delay(500);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
+
+            }else{
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
+                HAL_Delay(500);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
+
+            }
 
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
