@@ -167,8 +167,8 @@ int main(void)
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
 
             }
-        
 
+       
     return 0;
 }
 
