@@ -28,7 +28,8 @@
 
 void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin);
 void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
-
+        
+        InitializePin(GPIOA, pin, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
    
         for(int i=0; i < capacity; ++i){
                 HAL_GPIO_WritePin(GPIOA, pin, pattern[i]);
@@ -63,9 +64,13 @@ int main(void)
     // // as mentioned above, only one of the following code sections will be used
     // // (depending on which of the #define statements at the top of this file has been uncommented)
         
-        // unsigned int capacity = 26; 
-        unsigned int scapacity = 6; 
 
+        //lengths
+            // unsigned int capacity = 26; 
+            unsigned int scapacity = 6; 
+
+        //booleans
+            bool display = true;
 
     // long patterns
         // int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
@@ -82,8 +87,8 @@ int main(void)
         InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
         InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
 
-    //     //displaying patterns
-        while(true){
+    //displaying patterns
+        while(display){
 
             patterndisplay(test_array, scapacity, GPIO_PIN_5);
 
