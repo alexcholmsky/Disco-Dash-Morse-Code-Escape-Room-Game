@@ -167,28 +167,6 @@ int main(void)
             bool correctSize = false;
 
             for (int i = 0; i < 6; i++) {
-                /*if(userPattern[i] == 6) {
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-                    HAL_Delay(500);
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-                }
-                if(userPattern[i] == 8) {
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, true);
-                    HAL_Delay(500);
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
-                    
-                }
-                if(userPattern[i] == 0) {
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
-                    HAL_Delay(500);
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
-                }
-                if(userPattern[i] == 9) {
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, true);
-                    HAL_Delay(500);
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
-                }*/
-
                 if(userPattern[i]>0){
                     correctSize = true;
                 }else{
