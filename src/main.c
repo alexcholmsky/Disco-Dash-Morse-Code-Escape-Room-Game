@@ -164,6 +164,7 @@ int main(void)
             }
 
             bool isCorrect = false;
+            bool correctSize = false;
 
             for (int i = 0; i < 6; i++) {
                 /*if(userPattern[i] == 6) {
@@ -188,6 +189,12 @@ int main(void)
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
                 }*/
 
+                if(userPattern[i]>0){
+                    correctSize = true;
+                }else{
+                    correctSize = false;
+                }
+
                 if(userPattern[i] == correctPattern[i]){
                     isCorrect = true;
                 }else{
@@ -195,7 +202,7 @@ int main(void)
                 }
             } 
 
-            if(isCorrect){
+            if(isCorrect && correctSize){
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
                 HAL_Delay(500);
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
