@@ -97,56 +97,43 @@ int main(void)
 
         while(true){
 
-            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6))
-            {
-                if(!toggle) {
+            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
+                if(!toggle){
                     userPattern[counter] = 3;
                     toggle = true;
                     counter++;
 
                 }
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-                HAL_Delay(100);
             }
 
-            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8))
-            {
-                if(!toggle) {
+            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8)){
+                if(!toggle){
                     userPattern[counter] = 2;
                     toggle = true;
                     counter++;
 
                 }
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, true);
-                HAL_Delay(100);
             }
 
-            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0))
-            {
-                if(!toggle) {
+            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0)){
+                if(!toggle){
                     userPattern[counter] = 4;
                     toggle = true;
                     counter++;
 
                 }
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
-                HAL_Delay(100);
             }
 
-            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9))
-            {
-                if(!toggle) {
+            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9)){
+                if(!toggle){
                     userPattern[counter] = 5;
                     toggle = true;
                     counter++;
 
                 }
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, true);
-                HAL_Delay(100);
             }
 
-            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1))
-            {
+            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1)){
                 break;
             }
             else {
@@ -154,14 +141,7 @@ int main(void)
             }
 
 
-            
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
-
-
-            }
+        }
 
             bool isCorrect = false;
             bool correctSize = false;
@@ -191,11 +171,6 @@ int main(void)
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
 
             }
-
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
         
 
     return 0;
