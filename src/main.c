@@ -67,40 +67,42 @@ int main(void)
 
         //lengths
             // unsigned int capacity = 26; 
-            unsigned int scapacity = 6; 
+            unsigned int scapacity = 26; 
 
         //booleans
             bool display = true;
 
     // long patterns
-        // int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
-        // int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
-        // int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
-        // int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
+        int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
+        int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
+        int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
+        int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
 
     // short patterns
-        int test_array[6] = {1,0,1,0,1,0};
-        // InitializePin(GPIOA, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        // InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        // InitializePin(GPIOA, GPIO_PIN_8, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        // InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        // InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        
+        //InitializePin(GPIOA, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        //InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        //InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        //InitializePin(GPIOA, GPIO_PIN_8, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        //InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        //InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
 
     //displaying patterns
         while(display){
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_13);
+            patterndisplay(blue, scapacity, GPIO_PIN_10);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_14);
+            patterndisplay(blue, scapacity, GPIO_PIN_6);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_15);
+            patterndisplay(blue, scapacity, GPIO_PIN_9);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_11);
+            patterndisplay(blue, scapacity, GPIO_PIN_0);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_12);
+            patterndisplay(blue, scapacity, GPIO_PIN_1);
 
-            patterndisplay(test_array, scapacity, GPIO_PIN_4);
+            patterndisplay(blue, scapacity, GPIO_PIN_4);
+
+            break;
 
             
         }
