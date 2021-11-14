@@ -29,28 +29,28 @@
 void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin);
 void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
 
-    while(true){
+        
+        InitializePin(GPIOA, pin, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
    
         for(int i=0; i < capacity; ++i){
                 HAL_GPIO_WritePin(GPIOA, pin, pattern[i]);
                 HAL_Delay(500); 
             }
-    }
-}
 
-int main(void)
-{
+}   
+
+int main(void){
 
     HAL_Init(); // initialize the Hardware Abstraction Layer
 
-    // Peripherals (including GPIOs) are disabled by default to save power, so we
-    // use the Reset and Clock Control registers to enable the GPIO peripherals that we're using.
+    // // // Peripherals (including GPIOs) are disabled by default to save power, so we
+    // // // use the Reset and Clock Control registers to enable the GPIO peripherals that we're using.
 
     __HAL_RCC_GPIOA_CLK_ENABLE(); // enable port A (for the on-board LED, for example)
     __HAL_RCC_GPIOB_CLK_ENABLE(); // enable port B (for the rotary encoder inputs, for example)
     __HAL_RCC_GPIOC_CLK_ENABLE(); // enable port C (for the on-board blue pushbutton, for example)
 
-    // initialize the pins to be input, output, alternate function, etc...
+    // // initialize the pins to be input, output, alternate function, etc...
 
     InitializePin(GPIOB, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);// green button;
     InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red LED
@@ -60,22 +60,25 @@ int main(void)
     InitializePin(GPIOB, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red button
     InitializePin(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//black button
 
-    // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
-    // is required, since there's one on the board)
+    // // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
 
-    // set up for serial communication to the host computer
-    // (anything we write to the serial port will appear in the terminal (i.e. serial monitor) in VSCode)
+    // // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
+    // // is required, since there's one on the board)
+
+    // // set up for serial communication to the host computer
+    // // (anything we write to the serial port will appear in the terminal (i.e. serial monitor) in VSCode)
 
     SerialSetup(9600);
 
-    // as mentioned above, only one of the following code sections will be used
-    // (depending on which of the #define statements at the top of this file has been uncommented)
+    // // as mentioned above, only one of the following code sections will be used
+    // // (depending on which of the #define statements at the top of this file has been uncommented)
         
         unsigned int capacity = 26; 
         int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
         int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
         int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
         int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
+        int pattern[6] = {1,0,1,0,1,0};
 
         /*LEGEND
             - blue : [2]
@@ -90,6 +93,49 @@ int main(void)
         bool toggle = false;
         int userPattern[6] = {0};
         int counter = 0;
+
+        //lengths
+            // unsigned int capacity = 26; 
+            unsigned int scapacity = 6; 
+
+        //booleans
+            bool display = true;
+
+    // long patterns
+    /*    int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
+        int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
+        int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
+        int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};*/
+
+    // short patterns
+        
+        InitializePin(GPIOA, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_1, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        InitializePin(GPIOA, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+
+
+    //displaying patterns
+        while(true){
+
+            patterndisplay(pattern, scapacity, GPIO_PIN_10);
+
+            patterndisplay(pattern, scapacity, GPIO_PIN_6);
+
+            patterndisplay(pattern, scapacity, GPIO_PIN_9);
+
+            patterndisplay(pattern, scapacity, GPIO_PIN_0);
+
+            patterndisplay(pattern, scapacity, GPIO_PIN_1);
+
+            patterndisplay(pattern, scapacity, GPIO_PIN_4);
+
+            break;
+            
+        }
+
 
         while(true){
 
@@ -136,9 +182,8 @@ int main(void)
                 toggle = false;
             }
 
-
         }
-
+   
             bool isCorrect = false;
             bool correctSize = false;
 
@@ -169,6 +214,21 @@ int main(void)
             }
 
        
+
+        //button press turn on LED
+        // while(true){
+        //     while (!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13))
+        //     {
+        //         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
+        //         HAL_Delay(100);
+        //     }
+            
+        //     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
+
+        //     }
+
+        
+    
     return 0;
 }
 
