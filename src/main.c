@@ -52,13 +52,13 @@ int main(void)
 
     // initialize the pins to be input, output, alternate function, etc...
 
-    InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);// green button;
+    InitializePin(GPIOB, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);// green button;
     InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red LED
     InitializePin(GPIOA, GPIO_PIN_5, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//green LED
-    InitializePin(GPIOA, GPIO_PIN_8, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//blue button
-    InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//yellow button
-    InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red button
-    InitializePin(GPIOA, GPIO_PIN_1, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//black button
+    InitializePin(GPIOB, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//blue button
+    InitializePin(GPIOB, GPIO_PIN_8, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//yellow button
+    InitializePin(GPIOB, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red button
+    InitializePin(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//black button
 
     // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
     // is required, since there's one on the board)
@@ -93,7 +93,7 @@ int main(void)
 
         while(true){
 
-            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
+            if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9)){
                 if(!toggle){
                     userPattern[counter] = 3;
                     toggle = true;
@@ -102,7 +102,7 @@ int main(void)
                 }
             }
 
-            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8)){
+            else if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4)){
                 if(!toggle){
                     userPattern[counter] = 2;
                     toggle = true;
@@ -111,7 +111,7 @@ int main(void)
                 }
             }
 
-            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0)){
+            else if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10)){
                 if(!toggle){
                     userPattern[counter] = 4;
                     toggle = true;
@@ -120,7 +120,7 @@ int main(void)
                 }
             }
 
-            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9)){
+            else if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8)){
                 if(!toggle){
                     userPattern[counter] = 5;
                     toggle = true;
@@ -129,7 +129,7 @@ int main(void)
                 }
             }
 
-            else if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1)){
+            else if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0)){
                 break;
             }
             else {
