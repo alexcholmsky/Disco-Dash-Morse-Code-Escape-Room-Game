@@ -60,6 +60,27 @@ int main(void){
     InitializePin(GPIOB, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red button
     InitializePin(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//black button
 
+    InitializePin(GPIOA, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_1, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0); 
+        
+    unsigned int capacity = 26; 
+    int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
+    int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
+    int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
+    int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
+    int pattern[6] = {1,0,1,0,1,0};
+    const int correctPattern[6] = {2,2,2,2,2,2};
+    /*LEGEND
+            - blue : [2]
+            - green : [3]
+            - red : [4]
+            - yellow : [5]
+            - black : [6]
+        */
     // // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
 
     // // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
@@ -72,24 +93,10 @@ int main(void){
 
     // // as mentioned above, only one of the following code sections will be used
     // // (depending on which of the #define statements at the top of this file has been uncommented)
+        bool GAME_CONTINUE = true;
+        while(GAME_CONTINUE) {
         
-        unsigned int capacity = 26; 
-        int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
-        int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
-        int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
-        int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
-        int pattern[6] = {1,0,1,0,1,0};
-
-        /*LEGEND
-            - blue : [2]
-            - green : [3]
-            - red : [4]
-            - yellow : [5]
-            - black : [6]
-        */
-
-        const int correctPattern[6] = {2,2,2,2,2,2};
-
+        
         bool toggle = false;
         int userPattern[6] = {0};
         int counter = 0;
@@ -109,13 +116,9 @@ int main(void){
 
     // short patterns
         
-        InitializePin(GPIOA, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_1, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+        
 
+         
 
     //displaying patterns
         while(true){
@@ -213,6 +216,16 @@ int main(void){
 
             }
 
+            while(true) {
+                if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0)){
+                    break;
+                }
+            }
+            continue;
+        }
+
+
+
        
 
         //button press turn on LED
@@ -226,9 +239,6 @@ int main(void){
         //     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
 
         //     }
-
-        
-    
     return 0;
 }
 
