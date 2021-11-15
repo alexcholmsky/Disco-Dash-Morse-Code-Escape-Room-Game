@@ -80,7 +80,7 @@ int main(void){
             - red : [4]
             - yellow : [5]
             - black : [6]
-        */
+    */
     // // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
 
     // // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
@@ -93,6 +93,7 @@ int main(void){
 
     // // as mentioned above, only one of the following code sections will be used
     // // (depending on which of the #define statements at the top of this file has been uncommented)
+
         bool GAME_CONTINUE = true;
         while(GAME_CONTINUE) {
         
@@ -109,7 +110,7 @@ int main(void){
             bool display = true;
 
     // long patterns
-    /*    int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
+    /*  int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
         int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
         int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
         int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};*/
@@ -224,21 +225,6 @@ int main(void){
             continue;
         }
 
-
-
-       
-
-        //button press turn on LED
-        // while(true){
-        //     while (!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13))
-        //     {
-        //         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-        //         HAL_Delay(100);
-        //     }
-            
-        //     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-
-        //     }
     return 0;
 }
 
