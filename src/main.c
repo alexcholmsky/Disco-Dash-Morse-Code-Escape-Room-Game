@@ -23,6 +23,7 @@
 #include <stdbool.h> // booleans, i.e. true and false
 #include <stdio.h>   // sprintf() function
 #include <stdlib.h>  // srand() and random() functions
+#include <time.h>
 
 #include "ece198.h"
 
@@ -37,9 +38,19 @@ void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
                 HAL_Delay(500); 
             }
 
-}   
+} 
+
+//randomize order
+void randomize(int *colour_order, unsigned int num_colours, int *colour_possibilites);
+void randomize(int *colour_order, unsigned int num_colours, int *colour_possibilites) {
+    for(unsigned int i = 0; i < num_colours; i++){
+
+        colour_order[i] = colour_possibilites[rand()%4]; 
+    }
+};
 
 int main(void){
+    srand(time(NULL));
 
     HAL_Init(); // initialize the Hardware Abstraction Layer
 
@@ -72,6 +83,11 @@ int main(void){
 
     // // as mentioned above, only one of the following code sections will be used
     // // (depending on which of the #define statements at the top of this file has been uncommented)
+
+    //create an array of pointers to the respective colour arrays 
+
+        unsigned int num_colours = 6; 
+        int var = 7; 
         
         unsigned int capacity = 26; 
         int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
@@ -79,6 +95,8 @@ int main(void){
         int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
         int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
         int pattern[6] = {1,0,1,0,1,0};
+        int *colour_possibilites[4] = {blue, red, green, yellow}; 
+        int *colour_order[6] = {}; 
 
         /*LEGEND
             - blue : [2]
@@ -95,11 +113,8 @@ int main(void){
         int counter = 0;
 
         //lengths
-            // unsigned int capacity = 26; 
+            unsigned int capacity = 26; 
             unsigned int scapacity = 6; 
-
-        //booleans
-            bool display = true;
 
     // long patterns
     /*    int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
@@ -116,21 +131,29 @@ int main(void){
         InitializePin(GPIOA, GPIO_PIN_1, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
         InitializePin(GPIOA, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
 
+    //randomize
+    randomize(*colour_order, num_colours, colour_possibilites);
+
 
     //displaying patterns
         while(true){
 
-            patterndisplay(pattern, scapacity, GPIO_PIN_10);
+            for(unsigned i =0; i < 6; i++){
 
-            patterndisplay(pattern, scapacity, GPIO_PIN_6);
+                patterndisplay(colour_order[i], capacity, GPIO_PIN_10);
 
-            patterndisplay(pattern, scapacity, GPIO_PIN_9);
+                patterndisplay(colour_order[i], capacity, GPIO_PIN_6);
 
-            patterndisplay(pattern, scapacity, GPIO_PIN_0);
+                patterndisplay(colour_order[i], capacity, GPIO_PIN_9);
 
-            patterndisplay(pattern, scapacity, GPIO_PIN_1);
+                patterndisplay(colour_order[i], capacity, GPIO_PIN_0);
 
-            patterndisplay(pattern, scapacity, GPIO_PIN_4);
+                patterndisplay(colour_order[i], capacity, GPIO_PIN_1);
+
+                patterndisplay(colour_order[i], capacity, GPIO_PIN_4);
+
+            }
+            
 
             break;
             
