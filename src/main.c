@@ -34,7 +34,7 @@ void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
    
         for(int i=0; i < capacity; ++i){
                 HAL_GPIO_WritePin(GPIOA, pin, pattern[i]);
-                HAL_Delay(1000); 
+                HAL_Delay(1200); 
             }
 
 } 
@@ -49,34 +49,19 @@ void randomize(int **colour_order, unsigned int num_colours, int **colour_possib
         colour_order[i] = colour_possibilites[index%4]; 
         
         if(colour_order[i] == blue){
-            answer[i] = 2; 
-            // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-            // HAL_Delay(100);
-            // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-            // HAL_Delay(100);
-            
+            answer[i] = 2;             
     
 
         } else if (colour_order[i] == green){
             answer[i] = 3;
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-            HAL_Delay(100);
-            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-            HAL_Delay(100);
+
 
         } else if (colour_order[i] == red){
             answer[i] = 4;
-            // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-            // HAL_Delay(100);
-            // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-            // HAL_Delay(100);
      
         }  else{
             answer[i] = 5;
-            // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-            // HAL_Delay(100);
-            // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-            // HAL_Delay(100);
+
         }
         HAL_Delay(100);
 
@@ -84,11 +69,6 @@ void randomize(int **colour_order, unsigned int num_colours, int **colour_possib
 
     }
 
-    //test on green led
-    // patterndisplay(colour_order[0], 6, GPIO_PIN_5);
-    // patterndisplay(colour_order[1], 6, GPIO_PIN_5);
-
-    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
 };
 
 
@@ -115,6 +95,20 @@ int main(void){
     InitializePin(GPIOB, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red button
     InitializePin(GPIOB, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//black button
 
+    InitializePin(GPIOA, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_1, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
+    InitializePin(GPIOA, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0); 
+        
+    /*LEGEND
+            - blue : [2]
+            - green : [3]
+            - red : [4]
+            - yellow : [5]
+            - black : [6]
+    */
     // // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
 
     // // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
@@ -130,24 +124,17 @@ int main(void){
 
     //create an array of pointers to the respective colour arrays 
         // int var = 7; 
-        
-    //real arrays
-        // int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,0,1,0};
-        // int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
-        // int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
-        // int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
-        // int *colour_possibilites[4] = {blue, red, green, yellow}; 
-        // int *colour_order[6] = {}; 
 
     //test arrays
-    int blue[6] = {1,1,1,1,1,1}; 
-    int red[6] = {1,0,1,0,1,0};
-    int yellow[6] = {1,0,0,0,0,1};
-    int green[6] = {0,0,0,1,0,0}; 
-    unsigned int num_colours = 6; 
-    int *colour_possibilites[4] = {green, yellow, blue, red}; 
-    int *colour_order[6] = {blue, blue, blue, blue, blue, blue};
-    int correctPattern[6] = {2,2,2,2,2,2};
+        int blue[12] = {1,0,1,1,1,0,1,1,1,0,1,0};
+        int red[12] =  {1,1,1,0,1,1,1,0,1,0,1,0};
+        int yellow[12] = {1,0,1,0,1,0,1,1,1,0,1,0};
+        int green[12] = {1,1,1,0,1,1,1,0,1,1,1,0};
+
+        unsigned int num_colours = 6; 
+        int *colour_possibilites[4] = {green, yellow, blue, red}; 
+        int *colour_order[6] = {blue, blue, blue, blue, blue, blue};
+        int correctPattern[6] = {};
 
         /*LEGEND
             - blue : [2]
@@ -157,42 +144,19 @@ int main(void){
             - black : [6]
         */
 
-       // testing 
-       // y b g b b y
-       //
-       //
-       //
-       //
-       //
 
-
-
-
+        bool GAME_CONTINUE = true;
+        while(GAME_CONTINUE) {
+        
+        
         bool toggle = false;
         int userPattern[6] = {0};
         int counter = 0;
 
         //lengths
-            // unsigned int capacity = 26; 
-            unsigned int scapacity = 6; 
+        unsigned int scapacity = 12; 
 
-    // long patterns
-    /*  int blue[26] = {1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};
-        int red[26] = {1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1,0};
-        int yellow[26] = {1,0,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0};
-        int green[26] = {1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0};*/
-
-    // short patterns
-
-        InitializePin(GPIOA, GPIO_PIN_10, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_0, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_1, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-        InitializePin(GPIOA, GPIO_PIN_4, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);
-
-
-
+        
     //randomize
 
     while (!HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0));
@@ -230,10 +194,6 @@ int main(void){
                     userPattern[counter] = 3;
                     toggle = true;
                     counter++;
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
-                    HAL_Delay(100);
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
-                    HAL_Delay(100);
 
                 }
             }
@@ -287,22 +247,49 @@ int main(void){
                 if(userPattern[i] == correctPattern[i]){
                     isCorrect = true;
                     //testing input 
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
+                    /*HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
                     HAL_Delay(100);
                     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-                    HAL_Delay(100);
+                    HAL_Delay(100);*/
 
                 }else{
                     isCorrect = false;
                 }
             } 
 
-
             if(isCorrect && correctSize){
                 HAL_Delay(500);
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
                 HAL_Delay(500);
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
+
+                //does fun flashy thing
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, true);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, true);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, true);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, true);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, true);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, true);
+                HAL_Delay(2000);
+
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, false);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, false);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, false);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, false);
+                HAL_Delay(200);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
+
+
 
             }else{
                 HAL_Delay(1000);
@@ -312,22 +299,14 @@ int main(void){
 
             }
 
-       
+            while(true) {
+                if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0)){
+                    break;
+                }
+            }
+            continue;
+        }
 
-        //button press turn on LED
-        // while(true){
-        //     while (!HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13))
-        //     {
-        //         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-        //         HAL_Delay(100);
-        //     }
-            
-        //     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-
-        //     }
-
-        
-    
     return 0;
 }
 
