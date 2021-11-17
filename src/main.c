@@ -1,25 +1,6 @@
-// Sample code for ECE 198
+// ECE 198: Group 150
 
-// Written by Bernie Roehl, August 2021
-
-// This file contains code for a number of different examples.
-// Each one is surrounded by an #ifdef ... #endif block inside of main().
-
-// To run a particular example, you should remove the comment (//) in
-// front of exactly ONE of the following lines:
-
-// #define BUTTON_BLINK
-// #define LIGHT_SCHEDULER
-// #define TIME_RAND
-// #define KEYPAD
-// #define KEYPAD_CONTROL
-// #define SEVEN_SEGMENT
-// #define KEYPAD_SEVEN_SEGMENT
-// #define COLOR_LED
-// #define ROTARY_ENCODER
-// #define ANALOG
-// #define PWM
-
+// Written by Sairah Amuthan and Alex Cholmsky, November 2021
 
 #include <stdbool.h> // booleans, i.e. true and false
 #include <stdio.h>   // sprintf() function
@@ -72,8 +53,6 @@ void randomize(int **colour_order, unsigned int num_colours, int **colour_possib
 };
 
 
-
-
 int main(void){
 
     HAL_Init(); // initialize the Hardware Abstraction Layer
@@ -109,7 +88,6 @@ int main(void){
             - yellow : [5]
             - black : [6]
     */
-    // // InitializePin(GPIOA, GPIO_PIN_6, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);  // on-board LED
 
     // // note: the on-board pushbutton is fine with the default values (no internal pull-up resistor
     // // is required, since there's one on the board)
@@ -121,9 +99,6 @@ int main(void){
 
     // // as mentioned above, only one of the following code sections will be used
     // // (depending on which of the #define statements at the top of this file has been uncommented)
-
-    //create an array of pointers to the respective colour arrays 
-        // int var = 7; 
 
     //test arrays
         int blue[12] = {1,0,1,1,1,0,1,1,1,0,1,0};
@@ -163,8 +138,6 @@ int main(void){
     srand(HAL_GetTick());
     randomize(colour_order, num_colours, colour_possibilites, correctPattern, blue, red, green, yellow);
     HAL_Delay(100);
-
-    //
 
 
     //displaying patterns
@@ -246,11 +219,6 @@ int main(void){
 
                 if(userPattern[i] == correctPattern[i]){
                     isCorrect = true;
-                    //testing input 
-                    /*HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
-                    HAL_Delay(100);
-                    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
-                    HAL_Delay(100);*/
 
                 }else{
                     isCorrect = false;
