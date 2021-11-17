@@ -20,6 +20,30 @@ void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
 
 } 
 
+void randomDisplay(uint16_t pin1,uint16_t pin2,uint16_t pin3,uint16_t pin4,uint16_t pin5,uint16_t pin6){
+    int pattern1[] = {0,1,0,1,1,0,1,0,1,1,0,1,0,0,1,0,1,1,0};
+    int pattern2[] = {1,0,1,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,0};
+    int pattern3[] = {0,1,0,1,1,0,1,0,1,1,0,0,0,0,1,0,1,1,0};
+    int pattern4[] = {1,0,1,0,0,1,0,1,0,0,1,0,0,1,0,1,0,1,0};
+    int pattern5[] = {1,1,0,1,1,0,1,0,1,1,0,1,0,1,1,0,1,0,0};
+    int pattern6[] = {0,1,1,0,0,1,1,1,0,1,0,1,0,0,1,1,0,1,0};
+    unsigned int capacity = 19;
+
+    for(int i=0; i < capacity; ++i){
+        HAL_GPIO_WritePin(GPIOA, pin1, pattern1[i]);
+        HAL_GPIO_WritePin(GPIOA, pin2, pattern2[i]);
+        HAL_GPIO_WritePin(GPIOA, pin3, pattern3[i]);
+        HAL_GPIO_WritePin(GPIOA, pin4, pattern4[i]);
+        HAL_GPIO_WritePin(GPIOA, pin5, pattern5[i]);
+        HAL_GPIO_WritePin(GPIOA, pin6, pattern6[i]);
+        
+        HAL_Delay(100); 
+    }
+
+
+
+}
+
 void randomize(int **colour_order, unsigned int num_colours, int **colour_possibilites, int *answer, int *blue, int *red, int *green, int *yellow);
 void randomize(int **colour_order, unsigned int num_colours, int **colour_possibilites, int *answer, int *blue, int *red, int *green, int *yellow) {
 
@@ -231,39 +255,38 @@ int main(void){
                 HAL_Delay(500);
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, false);
 
-                //does fun flashy thing
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, true);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, true);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, true);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, true);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, true);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, true);
-                HAL_Delay(2000);
-
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, false);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, false);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, false);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, false);
-                HAL_Delay(200);
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
-
-
+                randomDisplay(GPIO_PIN_10,GPIO_PIN_6,GPIO_PIN_9,GPIO_PIN_0,GPIO_PIN_4,GPIO_PIN_1);
 
             }else{
                 HAL_Delay(1000);
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, true);
                 HAL_Delay(500);
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, false);
+
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, true);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, true);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, true);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, true);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, true);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, true);
+                HAL_Delay(1000);
+
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, false);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, false);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, false);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, false);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, false);
+                HAL_Delay(100);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, false);
 
             }
 
