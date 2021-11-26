@@ -8,7 +8,7 @@
 #include <time.h>
 #include "ece198.h"
 
-
+//displays a pattern (array of 1s and 0s) using an LED
 void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin);
 void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
 
@@ -20,6 +20,7 @@ void patterndisplay(int pattern[], unsigned int capacity, uint16_t pin){
 
 } 
 
+//celebratory light display
 void randomDisplay(uint16_t pin1,uint16_t pin2,uint16_t pin3,uint16_t pin4,uint16_t pin5,uint16_t pin6){
     int pattern1[] = {0,1,0,1,1,0,1,0,1,1,0,1,0,0,1,0,1,1,0};
     int pattern2[] = {1,0,1,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,0};
@@ -44,6 +45,7 @@ void randomDisplay(uint16_t pin1,uint16_t pin2,uint16_t pin3,uint16_t pin4,uint1
 
 }
 
+//randomizes the order and frequency of the patterns, and update the answer key to match 
 void randomize(int **colour_order, unsigned int num_colours, int **colour_possibilites, int *answer, int *blue, int *red, int *green, int *yellow);
 void randomize(int **colour_order, unsigned int num_colours, int **colour_possibilites, int *answer, int *blue, int *red, int *green, int *yellow) {
 
@@ -53,6 +55,7 @@ void randomize(int **colour_order, unsigned int num_colours, int **colour_possib
         int index = rand(); 
         colour_order[i] = colour_possibilites[index%4]; 
         
+        //updates answer key to match
         if(colour_order[i] == blue){
             answer[i] = 2;             
     
@@ -88,7 +91,7 @@ int main(void){
     __HAL_RCC_GPIOB_CLK_ENABLE(); // enable port B (for the rotary encoder inputs, for example)
     __HAL_RCC_GPIOC_CLK_ENABLE(); // enable port C (for the on-board blue pushbutton, for example)
 
-    // // initialize the pins to be input, output, alternate function, etc...
+    // intitialization
 
     InitializePin(GPIOB, GPIO_PIN_9, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);// green button;
     InitializePin(GPIOA, GPIO_PIN_7, GPIO_MODE_OUTPUT_PP, GPIO_NOPULL, 0);//red LED
@@ -124,7 +127,7 @@ int main(void){
     // // as mentioned above, only one of the following code sections will be used
     // // (depending on which of the #define statements at the top of this file has been uncommented)
 
-    //test arrays
+    //patterns 
         int blue[12] = {1,0,1,1,1,0,1,1,1,0,1,0};
         int red[12] =  {1,1,1,0,1,1,1,0,1,0,1,0};
         int yellow[12] = {1,0,1,0,1,0,1,1,1,0,1,0};
@@ -183,7 +186,7 @@ int main(void){
             
         }
 
-
+        //taking in user input
         while(true){
 
             if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9)){
@@ -230,10 +233,12 @@ int main(void){
             }
 
         }
-   
+            //evaluating user input
+
             bool isCorrect = false;
             bool correctSize = false;
 
+             
             for (int i = 0; i < 6; i++) {
                 if(userPattern[i]>0){
                     correctSize = true;
@@ -249,6 +254,7 @@ int main(void){
                 }
             } 
 
+             //if user guessed right
             if(isCorrect && correctSize){
                 HAL_Delay(500);
                 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, true);
@@ -290,6 +296,7 @@ int main(void){
 
             }
 
+             //resets the game
             while(true) {
                 if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0)){
                     break;
